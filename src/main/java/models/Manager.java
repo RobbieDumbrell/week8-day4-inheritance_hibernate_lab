@@ -1,9 +1,6 @@
 package models;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,19 +9,17 @@ import java.util.List;
 public class Manager extends Employee {
 
     private int budget;
-    private String department;
+    private Department department;
     private List<Administrator> administrators;
 
     public Manager() {
     }
 
-    public Manager(String name, String NINumber, int salary, int budget, String department) {
+    public Manager(String name, String NINumber, int salary, int budget) {
         super(name, NINumber, salary);
         this.budget = budget;
-        this.department = department;
         this.administrators = new ArrayList<Administrator>();
     }
-
 
     public int getBudget() {
         return budget;
@@ -34,11 +29,12 @@ public class Manager extends Employee {
         this.budget = budget;
     }
 
-    public String getDepartment() {
+    @OneToOne(mappedBy = "manager", fetch = FetchType.LAZY)
+    public Department getDepartment() {
         return department;
     }
 
-    public void setDepartment(String department) {
+    public void setDepartment(Department department) {
         this.department = department;
     }
 
