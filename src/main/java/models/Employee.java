@@ -1,5 +1,10 @@
 package models;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "employees")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Employee {
 
     private int id;
@@ -16,6 +21,9 @@ public abstract class Employee {
         this.salary = salary;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -24,6 +32,7 @@ public abstract class Employee {
         this.id = id;
     }
 
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -32,6 +41,7 @@ public abstract class Employee {
         this.name = name;
     }
 
+    @Column(name = "ni_number")
     public String getNINumber() {
         return NINumber;
     }
@@ -40,6 +50,7 @@ public abstract class Employee {
         this.NINumber = NINumber;
     }
 
+    @Column(name = "salary")
     public int getSalary() {
         return salary;
     }
